@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup</title>
+</head>
+<body>
+
+<div id="header" th:include="layout/page :: header"></div>
+
+<h1>All Spittles</h1>
+
+<ul th:each="spittle : ${spittles}">
+    <li th:replace="_spittle_abstract :: spittle_abstract"></li>
+</ul>
+
+
+<div th:if="${!spittlePage.isFirst()}">
+    <a th:href="@{'/spittle/all?page=' + ${spittlePage.number - 1}}">pre</a>
+</div>
+<div th:if="${!spittlePage.isLast()}">
+    <a th:href="@{'/spittle/all?page=' + ${spittlePage.number + 1}}">next</a>
+</div>
+
+<div id="footer" th:include="layout/page :: copy"></div>
+
+</body>
+</html>

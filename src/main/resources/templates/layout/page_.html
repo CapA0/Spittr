@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<body>
+
+<div th:fragment="header">
+    <a th:href="@{/}">
+        <img th:height="50px" th:width="50px" th:src="@{/images/spitter_logo_50.png}" border="0" />
+    </a>
+
+
+    <div sec:authorize="!isAuthenticated()">
+        <a th:href="@{/spitter/signup}">signup</a>
+        | <a th:href="@{/spitter/login}">login</a>
+    </div>
+
+
+    <div sec:authorize="isAuthenticated()">
+        <a th:href="@{'/spitter/' + ${#authentication.principal.id}}" sec:authentication="name">user-name</a>
+        | <a th:href="@{/logout}">logout</a>
+    </div>
+    <br/>
+
+    <a th:href="@{/spittle/all}">all spittles</a>
+    <span sec:authorize="isAuthenticated()">
+        | <a th:href="@{/spittle/follow}">followed spittles</a>
+        | <a th:href="@{/spittle/me}">my spittles</a>
+        | <a th:href="@{/spittle/create}">create spittle</a>
+    </span>
+    <br/>
+
+</div>
+
+<div>Content goes here</div>
+
+<div th:fragment="copy">Copyright &copy; srj</div>
+</body>
+
+</html>

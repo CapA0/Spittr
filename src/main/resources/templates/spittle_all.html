@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout/layout">
+<head>
+    <title>Spittr</title>
+</head>
+
+<body>
+
+<div class="row clearfix" layout:fragment="content">
+    <div class="col-md-12 column">
+        <h2>
+            All Spittles
+        </h2>
+
+        <ul th:each="spittle : ${spittles}">
+            <li th:replace="layout/_spittle_abstract :: spittle_abstract"></li>
+        </ul>
+
+        <ul class="pagination">
+            <li th:if="${!spittlePage.isFirst()}">
+                <a th:href="@{'/spittle/all?page=' + ${spittlePage.number - 1}}">Prev</a>
+            </li>
+            <li th:if="${!spittlePage.isLast()}">
+                <a th:href="@{'/spittle/all?page=' + ${spittlePage.number + 1}}">Next</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

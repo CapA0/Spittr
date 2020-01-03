@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact</title>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script th:inline="javascript" type="text/javascript">
+        $(document).ready(function () {
+            var a = [[${md}]];
+            $("#md").html(a);
+        })
+    </script>
+</head>
+<body>
+
+<div id="header" th:include="page :: header"></div>
+
+<h1>SpringBoot Contact</h1>
+
+<form method="post">
+    <label>FirstName: </label>
+    <input type="text" name="firstName"/><br/>
+
+    <label>LastName: </label>
+    <input type="text" name="lastName"/><br/>
+
+    <label>PhoneNumber: </label>
+    <input type="text" name="phoneNumber"/><br/>
+
+    <label>Message: </label>
+    <textarea name="message" cols="80" rows="5"></textarea><br/>
+
+    <input type="submit"/>
+
+</form>
+
+<ul th:each="contact : ${contacts}">
+    <li>
+        <span th:text="${contact.firstName}">First</span>
+        <span th:text="${contact.lastName}">Last</span>
+        <span th:text="${contact.phoneNumber}">PhoneNumber</span>
+        <!--<p th:text="${contact.message}">Message</p>-->
+        <div id="md"></div>
+    </li>
+</ul>
+
+<div id="footer" th:include="page :: copy"></div>
+
+</body>
+</html>

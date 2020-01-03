@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout/layout">
+<head>
+    <title>Spittr</title>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script th:inline="javascript" type="text/javascript">
+        $(document).ready(function () {
+            var a = [[${md}]];
+            $("#md").html(a);
+        })
+    </script>
+</head>
+
+<body>
+
+<!--<div layout:fragment="content">-->
+<!--<h1 th:text="${spittle.title}">title</h1>-->
+<!--<div th:if="${#authentication.name} == ${author.username}">-->
+    <!--<a th:href="@{'/spittle/edit/' + ${spittle.id}}">edit</a>-->
+    <!--| <a th:href="@{'/spittle/delete/' + ${spittle.id}}">delete</a>-->
+<!--</div>-->
+<!--<hr/>-->
+<!--<div id="md"></div>-->
+<!--</div>-->
+
+<div layout:fragment="content" class="row clearfix">
+    <div class="col-md-12 column">
+        <div class="page-header">
+            <h1 th:text="${spittle.title}">
+                Example page header
+            </h1>
+        </div>
+        <div th:if="${#authentication.name} == ${author.username}">
+            <a th:href="@{'/spittle/edit/' + ${spittle.id}}"><button type="button" class="btn btn-default">edit</button></a>
+            <a th:href="@{'/spittle/delete/' + ${spittle.id}}"><button type="button" class="btn btn-default">delete</button></a>
+        </div>
+        <p id="md">
+        </p>
+        <p>
+            <a class="btn" th:href="@{'/spittle/edit/' + ${spittle.id}}">edit »</a>
+        </p>
+    </div>
+</div>
+
+
+</body>
+
+</html>

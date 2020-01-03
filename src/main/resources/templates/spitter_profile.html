@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout/layout">
+<head>
+    <title>Spittr</title>
+</head>
+
+<body>
+
+<!--<div layout:fragment="content">-->
+<!--<h1>Spitter Profile</h1>-->
+
+<!--<div>-->
+    <!--<span th:text="${spitter.username}">username</span>-->
+    <!--<span th:text="${spitter.aboutMe}">about_me</span>-->
+    <!--<span th:text="${spitter.follows.size()}">follows</span> follows-->
+    <!--<span th:text="${spitter.followers.size()}">followers</span> followers-->
+    <!--<span th:text="${spitter.spittles.size()}">spittles</span> spittles-->
+
+
+    <!--<div th:if="${#authentication.name} == ${spitter.username}">-->
+        <!--<a th:href="@{/spitter/edit}">edit</a>-->
+    <!--</div>-->
+    <!--<div th:if="${#authentication.name} != ${spitter.username}">-->
+        <!--<div th:unless="${curSpitter.isFollowing(spitter)}">-->
+            <!--<a th:href="@{'/spitter/follow/' + ${spitter.id}}">follow</a>-->
+        <!--</div>-->
+        <!--<div th:if="${curSpitter.isFollowing(spitter)}">-->
+            <!--<a th:href="@{'/spitter/unfollow/' + ${spitter.id}}">unfollow</a>-->
+        <!--</div>-->
+    <!--</div>-->
+
+<!--</div>-->
+<!--</div>-->
+
+
+
+<div layout:fragment="content" class="row clearfix">
+    <div class="col-md-12 column">
+        <div class="page-header">
+            <h1 th:text="${spitter.username}">
+                Example page header
+            </h1>
+            <h1>
+                <small th:text="${spitter.aboutMe}">Subtext for header</small>
+            </h1>
+        </div>
+        <span class="label label-default"><span th:text="${spitter.follows.size()}"></span>follows</span>
+        <span class="label label-default"><span th:text="${spitter.followers.size()}"></span>followers</span>
+        <span class="label label-default"><span th:text="${spitter.spittles.size()}"></span>spittles</span>
+
+        <div th:if="${#authentication.name} == ${spitter.username}">
+            <a th:href="@{/spitter/edit}"><button type="button" class="btn btn-default btn-link">edit</button></a>
+        </div>
+
+
+        <div th:if="${#authentication.name} != ${spitter.username}">
+            <div th:unless="${curSpitter.isFollowing(spitter)}">
+                <a th:href="@{'/spitter/follow/' + ${spitter.id}}"><button type="button" class="btn btn-default btn-link">follow</button></a>
+            </div>
+            <div th:if="${curSpitter.isFollowing(spitter)}">
+                <a th:href="@{'/spitter/unfollow/' + ${spitter.id}}"><button type="button" class="btn btn-default btn-link">unfollow</button></a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

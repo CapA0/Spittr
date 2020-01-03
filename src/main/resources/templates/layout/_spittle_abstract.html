@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup</title>
+</head>
+<body>
+
+<li class="spittleabstract" th:fragment="spittle_abstract">
+    <a class="btn" th:text="${spittle.title}" th:href="@{'/spittle/' + ${spittle.id}}"><h1>Title</h1></a><br/>
+    author: <a th:href="@{'/spitter/' + ${spittle.spitter.id}}" th:text="${spittle.spitter.username}">authorname</a>
+    | created at: <span th:text="${#dates.format(spittle.createdAt, 'yyyy-MM-dd')}">createdAt</span>
+</li>
+
+</body>
+</html>
