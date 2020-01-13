@@ -39,12 +39,19 @@
 <div layout:fragment="content" class="row clearfix">
     <div class="col-md-12 column">
         <div class="page-header">
-            <h1 th:text="${spitter.username}">
-                Example page header
-            </h1>
-            <h1>
-                <small th:text="${spitter.aboutMe}">Subtext for header</small>
-            </h1>
+            <table>
+                <tr>
+                    <td><img th:src="${spitter.getAvatarUrl()}"/></td>
+                    <td>
+                        <h1 th:text="${spitter.username}">
+                            Example page header
+                        </h1>
+                        <h1>
+                            <small th:text="${spitter.aboutMe}">Subtext for header</small>
+                        </h1>
+                    </td>
+                </tr>
+            </table>
         </div>
         <span class="label label-default"><span th:text="${spitter.follows.size()}"></span>follows</span>
         <span class="label label-default"><span th:text="${spitter.followers.size()}"></span>followers</span>

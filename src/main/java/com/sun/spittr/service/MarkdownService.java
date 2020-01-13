@@ -21,7 +21,7 @@ public class MarkdownService {
         HtmlRenderer renderer = HtmlRenderer.builder().build();
         Document document = parser.parse(markdown);
         String html = renderer.render(document);
-        logger.info("markdown html: " + html);
+//        logger.info("markdown html: " + html);
         return html;
     }
 
