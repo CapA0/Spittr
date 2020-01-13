@@ -4,6 +4,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import static com.sun.spittr.util.Md5Util.md5;
 
 import javax.persistence.*;
 import java.util.List;
@@ -127,7 +128,16 @@ public class Spitter {
     }
 
     public String getAvatarUrl() {
-        return avatarUrl;
+
+        /*
+        * todo
+        * if data base avatar url is empty, then return the gravatar url img
+        * else return the database avatar url
+         */
+
+        String digest = md5(getUsername()); //"5EB63BBBE01EEED093CB22BB8F5ACDC3";
+        int size = 128;
+        return String.format("https://www.gravatar.com/avatar/%s?d=identicon&s=%d", digest, size);
     }
 
     public void setAvatarUrl(String avatarUrl) {
@@ -170,7 +180,6 @@ public class Spitter {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(id, username, passwordHash, avatarUrl, aboutMe);
     }
 }
