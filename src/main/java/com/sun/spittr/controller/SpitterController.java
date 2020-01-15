@@ -4,6 +4,7 @@ import com.sun.spittr.model.Spitter;
 import com.sun.spittr.model.SpitterEditForm;
 import com.sun.spittr.model.SpitterSignupForm;
 import com.sun.spittr.repository.SpitterRepository;
+import com.sun.spittr.service.AvatarStorageService;
 import com.sun.spittr.service.SpitterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -29,6 +32,9 @@ public class SpitterController {
 
     @Autowired
     SpitterService spitterService;
+
+    @Autowired
+    AvatarStorageService avatarStorageService;
 
     public SpitterController() {
     }
@@ -119,6 +125,23 @@ public class SpitterController {
         curSpitter.unfollow(spitter);
         spitterRepository.save(curSpitter);
         return "redirect:/spitter/" + spitterId;
+    }
+
+    @GetMapping("/editavatar")
+    public String editAvatar() {
+        // return avatar upload page
+        return "editavatar";
+    }
+
+    @PostMapping("/editavatar")
+    public String uploadAvatar(@RequestParam("file") MultipartFile file, Principal principal) {
+
+        Spitter curSpitter = spitterRepository.findByUsername(principal.getName());
+        curSpitter.setAvatarUrl("" + curSpitter.getId() + ".jpg");
+        spitterRepository.save(curSpitter);
+        String fileName = avatarStorageService.storeFile(file, curSpitter);
+
+        return "redirect:/spitter/" + curSpitter.getId();
     }
 
 }

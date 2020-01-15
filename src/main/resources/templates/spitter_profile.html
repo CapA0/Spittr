@@ -41,7 +41,7 @@
         <div class="page-header">
             <table>
                 <tr>
-                    <td><img th:src="${spitter.getAvatarUrl()}"/></td>
+                    <td><img th:src="${spitter.getDisplayAvatarUrl()}" th:width="100px" th:height="100px"/></td>
                     <td>
                         <h1 th:text="${spitter.username}">
                             Example page header

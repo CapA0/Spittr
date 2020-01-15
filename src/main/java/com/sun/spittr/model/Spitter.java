@@ -80,7 +80,6 @@ public class Spitter {
 
     public Spitter(String username, String password) {
         this(username, password, null, null);
-        this.avatarUrl = autoGenerateAvatarUrl(username);
     }
 
     public void follow(Spitter spitter) {
@@ -93,7 +92,7 @@ public class Spitter {
         return follows.contains(spitter);
     }
     private String autoGenerateAvatarUrl(String username) {
-        return username;
+        return "";
     }
 
     public Spitter(String username, String password, String avatarUrl, String aboutMe) {
@@ -127,17 +126,19 @@ public class Spitter {
         this.passwordHash = passwordHash;
     }
 
+    public String getDisplayAvatarUrl() {
+        if(getAvatarUrl() == null || getAvatarUrl().length() == 0) {
+            String digest = md5(getUsername()); //"5EB63BBBE01EEED093CB22BB8F5ACDC3";
+            int size = 128;
+            return String.format("https://www.gravatar.com/avatar/%s?d=identicon&s=%d", digest, size);
+        }
+        else {
+            return "/avatar/" + getAvatarUrl();
+        }
+    }
+
     public String getAvatarUrl() {
-
-        /*
-        * todo
-        * if data base avatar url is empty, then return the gravatar url img
-        * else return the database avatar url
-         */
-
-        String digest = md5(getUsername()); //"5EB63BBBE01EEED093CB22BB8F5ACDC3";
-        int size = 128;
-        return String.format("https://www.gravatar.com/avatar/%s?d=identicon&s=%d", digest, size);
+        return avatarUrl;
     }
 
     public void setAvatarUrl(String avatarUrl) {
