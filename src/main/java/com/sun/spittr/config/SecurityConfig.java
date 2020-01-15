@@ -38,8 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().logoutSuccessUrl("/").and()
 
                 .authorizeRequests()
-                .antMatchers("/").authenticated()
+                .antMatchers("/", "/spittle/**").authenticated()
                 .anyRequest().permitAll().and()
                 .csrf().disable();
     }
 }
+
